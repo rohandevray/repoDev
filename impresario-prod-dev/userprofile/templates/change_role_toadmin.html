@@ -1,0 +1,43 @@
+{% extends 'adminbase.html' %} 
+<!DOCTYPE html>
+{% load static %}
+{% block title %} Status change {% endblock %}
+
+{% block active %} <li><a href="{% url 'userauth:home' %}">HOME</a></li>
+      <li ><a href="/scheduling">EXISTING TEAMS</a></li>  
+      <li class="active" ><a href="{% url 'new_team' %}">CREATE TEAM</a></li>
+      {% comment %} <li><a href="#">TEAM REQUESTS</a></li> {% endcomment %}
+      <li><a href="{% url 'view_calendar' %}">CALENDAR</a></li>
+{% endblock %}
+
+{% block body %}
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+  <h1> Change Status </h1>
+<form method="post" >
+  {% csrf_token %}
+  
+  <label for="team_members">Team members:</label><br />
+  <div id="team_members" multiple="true" name="checks"></div>
+  <br />
+  <input type="submit" class = "fadeIn" value="Change status to admin"><br />
+  {% comment %} {% if warning%} {{warning}} {% endif %} {% endcomment %}
+</form>
+</div>
+</div>
+<script>
+  var ids = [];
+  var names = [];
+  var admin = [];
+  ("{% for membership in memberships %}");
+  ids.push("{{membership.user.id}}");
+  names.push("{{membership.user}}");
+  admin.push("{{membership.role}}");
+  console.log(ids);
+  console.log(names);
+  console.log(admin);
+  ("{% endfor %}");
+</script>
+<script src="{% static 'js/create_team.js' %}"></script>
+{% endblock %}

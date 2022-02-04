@@ -1,0 +1,33 @@
+{% extends 'adminbase.html' %} 
+{% block title %}
+Show Event
+{% endblock %}
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+{% load static %}
+{% block body %}
+<div class="container text-center fadeIn" style="background-color:#ebf0ef;  border: solid; border-radius: 10px; border-color: #36b39a; padding: 40px;  margin: 0; position: absolute; top: 60%; left: 50%; transform: translate(-50%, -50%);">
+   <h1 class="text-center" style="color:#0b5243;font-size:5.0rem;"> {{ event.title}}</h1>
+   <h3 class="text-center" style="color:#0d725e;font-size:1.75rem;"><strong>Organization:</strong> {{event.organization.name}} </h3>
+   <h3 class="text-center" style="color:#0d725e;font-size:1.75rem;"><strong>Location:</strong> {{ event.location}}</h3>
+   <h3 class="text-center" style="color:#0d725e;font-size:1.75rem;"><strong>Start:</strong> {{ event.start_time}}</h3>
+   <h3 class="text-center" style="color:#0d725e;font-size:1.75rem;"><strong>End:</strong> {{ event.end_time}}</h3>
+
+   <h3 class="text-center" style="color:#0d725e;font-size:1.75rem;">
+   <strong>
+   Description:
+   </strong>
+   <br>
+   {{ event.description}}
+   </h3>
+
+   <h3 class="text-center" style="color:#0d725e;font-size:1.75rem;"><strong>Attendees:</strong> </h3>
+   {% for a in attendees %}
+      <h3 class="text-center" style="color:#0d725e;font-size:1.75rem; padding: 1px;"> {{ a.username}} </h3>
+   {% endfor %}
+
+   <br><br><a class="btn btn-info"  href = "/userprofile/edit_event/{{event.id}}" style="color:#0a2b24; font-size:2.0rem; position: absolute; left: 50%; transform: translate(-50%, -50%);"> Edit Event</a>
+</div>
+{% endblock %}

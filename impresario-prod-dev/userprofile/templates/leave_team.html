@@ -1,0 +1,24 @@
+{% extends 'adminbase.html' %} 
+<!DOCTYPE html>
+{% load static %}
+{% block title %} Leave Team {% endblock %}
+
+{% block active %} <li><a href="{% url 'userauth:home' %}">HOME</a></li>
+      <li ><a href="/scheduling">EXISTING TEAMS</a></li>  
+      <li class="active" ><a href="{% url 'new_team' %}">CREATE TEAM</a></li>
+      {% comment %} <li><a href="#">TEAM REQUESTS</a></li> {% endcomment %}
+      <li><a href="{% url 'view_calendar' %}">CALENDAR</a></li>
+{% endblock %}
+
+{% block body %}
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+  <h1> {{name}} </h1><br>
+  {% if warning%} {{warning}} {% endif %}
+  <br>
+
+</div>
+</div>
+
+{% endblock %}

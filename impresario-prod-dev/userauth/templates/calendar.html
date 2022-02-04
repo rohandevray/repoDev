@@ -1,0 +1,20 @@
+{% extends 'adminbase.html' %}
+{% block title %} Calendar {% endblock %}
+
+{% block active %} <li><a href="{% url 'userauth:home' %}">HOME</a></li>
+      <li ><a href="/scheduling">EXISTING TEAMS</a></li>  
+      <li  ><a href="{% url 'new_team' %}">CREATE TEAM</a></li>
+      {% comment %} <li><a href="#">TEAM REQUESTS</a></li> {% endcomment %}
+      <li class="active"><a href="{% url 'view_calendar' %}">CALENDAR</a></li>
+{% endblock %}
+{% load static%}
+{% block body %}
+<div class="fadeIn container d-flex flex-column align-items-center"style="background-color:#f2d9d91c">
+      <h1 class="text-center" style="color:white">
+      Event Calendar 
+      </h1>
+      <iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23009688&amp;ctz=Asia%2FKolkata&amp;src=Y19wazh0aXJybDRqN2M5cjllZTFvMzJjN3Job0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&amp;color=%23E67C73&amp;showTitle=0&amp;showPrint=0&amp;showCalendars=0" style="border-width:0" width="1000" height="600" frameborder="0" scrolling="no"></iframe>
+</div>
+
+
+{% endblock %}

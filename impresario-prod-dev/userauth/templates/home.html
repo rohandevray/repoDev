@@ -1,0 +1,44 @@
+{% extends 'adminbase.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block active %} <li class="active"><a href="{% url 'userauth:home' %}">HOME</a></li>
+      <li><a href="/scheduling">EXISTING TEAMS</a></li>  
+      <li><a href="{% url 'new_team' %}">CREATE TEAM</a></li>
+      {% comment %} <li><a href="#">TEAM REQUESTS</a></li> {% endcomment %}
+      <li><a href="{% url 'view_calendar' %}">CALENDAR</a></li>
+{% endblock %}
+
+{% block body %}
+      <div class="container text-center fadeIn" style="background-color:#ebf0ef;  border: solid; border-radius: 10px; border-color: #36b39a; padding: 40px;  margin: 0; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <h1 class="text-center" style="color:#10473c">Welcome to Impresario!!</h1>
+        {% comment %} <h3>
+        {{account.user.username}}
+        </h3>
+        <h3>
+        {{account.user.email}}
+        </h3>
+        <br> {% endcomment %}
+        <h3 style="color: #128f76";>
+        Hello {{account.profile.first_name}} {{account.profile.last_name}}, 
+
+        </h3>
+        <h3 style="color:#57C0AB">
+        Hope you're doing well!! We present to you <i style="font-family: 'Satisfy', cursive;">Impresario</i>, your go-to appilication to keep track of your events and your organisations. You can create an organisation with any no. of users you want. You along with other members can create a sub org which will be a child of the org that you have created. Each organisation can have any no. of events and all of those events will be stored in the calendar and all the attendees for an event get google calendar invitations. You can view the club calendar in the calendars page to see all the events.     
+        </h3><br><br>
+        <a class="btn btn-info" href="/scheduling" style="color:#0a2b24; font-size:2.0rem; position: absolute; left: 50%; transform: translate(-50%, -50%);">See all Organisations</a><br><br>
+        <br>
+        <a class="btn btn-info" href="{% url 'new_team' %}" style="color:#0a2b24; font-size:2.0rem; position: absolute; left: 50%; transform: translate(-50%, -50%);">Create your own organisation</a>
+
+        <br>
+
+        {% comment %} <h3>
+        {{account.profile.phone_number}} 
+        </h3>
+        <br>
+        <h3>
+        {{account.profile.gender}} 
+        </h3> {% endcomment %}
+      </div>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'adminbase.html' %} 
+
+<!DOCTYPE html>
+{% load static %}
+{% block title %}Add Event {% endblock %}
+
+{% block active %} 
+<li class="active"><a href="{% url 'userauth:home' %}">HOME</a></li>
+<li ><a href="/scheduling">EXISTING TEAMS</a></li>  
+<li><a href="{% url 'new_team' %}">CREATE TEAM</a></li>
+{% comment %} <li><a href="{% url 'team_request' par_id %}">TEAM REQUESTS</a></li> {% endcomment %}
+<li><a href="{% url 'view_calendar' %}">CALENDAR</a></li>
+{% endblock %}
+
+{% block body %}
+{% comment %} <strong>
+{{warning}}
+</strong> {% endcomment %}
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+<h1> Add Event </h1>
+<form action = "/userprofile/{{ org.id }}/add_event"  method = 'POST'>
+{% csrf_token %}
+<input type = "text" class="fadeIn second" name="title" placeholder = "title">
+<input type = "text"  class="fadeIn second" name="description"placeholder = "description">
+<input type = "text" class="fadeIn second" name="location" placeholder = "location">
+<input type="date" class="fadeIn second" name="start-date" required>
+<input type="time"class="fadeIn second" name="start-time" required>
+<input type="date" class="fadeIn second" name="end-date" required>
+<input type="time" class="fadeIn second" name="end-time" required>
+<input type="submit" class="fadeIn second"value="Add">
+</form>
+</div>
+</div>
+
+{% endblock %}

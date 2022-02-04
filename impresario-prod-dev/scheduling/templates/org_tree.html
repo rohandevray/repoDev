@@ -1,0 +1,23 @@
+{% extends 'adminbase.html' %}
+{% block title %} Organisations {% endblock %}
+{% block active %} <li><a href="{% url 'userauth:home' %}">HOME</a></li>
+      <li class="active"><a href="/scheduling">EXISTING TEAMS</a></li>  
+      <li><a href="{% url 'new_team' %}">CREATE TEAM</a></li>
+      {% comment %} <li><a href="#">TEAM REQUESTS</a></li> {% endcomment %}
+      <li><a href="{% url 'view_calendar' %}">CALENDAR</a></li>
+{% endblock %}
+
+
+{% block body %}{% load my_filter %}
+<div class="container fadeIn" style="background-color:#ebf0ef; border: solid; border-radius: 10px; border-color: #36b39a; padding: 40px; margin: 0; position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);">
+    <h1 class="text-center" style="color:#36b39a"> Organisations and their Hierarchy</h1>
+
+    {% for org in listo %} 
+        {{""|indent_it:org.1}}
+        <a style = "margin:5px; font-size:2.5rem;"href="{% url 'orgDetail' org.2 %}">-> {{org.0}}</a>
+        <br>
+    {% endfor %}
+    <a class="btn btn-info" href = "{% url 'new_team' %}" style="color:#0a2b24; font-size:2.0rem; position: absolute; left: 50%; transform: translate(-50%, -50%);"> CREATE NEW TEAM </a>
+</div>
+
+{% endblock %}

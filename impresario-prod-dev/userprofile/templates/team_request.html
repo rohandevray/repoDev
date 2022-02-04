@@ -1,0 +1,40 @@
+{% extends 'adminbase.html' %} {% block title %} Team Requests {% endblock %} {% load static%} {% block body%}
+<div class="container text-center fadeIn" style="background-color:#ebf0ef;  border: solid; border-radius: 10px; border-color: #36b39a; padding: 40px;  margin: 0; position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);">
+  {% if team_request%}
+    {% for request in team_request %}
+    <div style ="color:#0b5243;font-size:5.0rem;"id="{{request.id}}">
+      {{request}}
+      <button id="approve-{{request.id}}" onclick= "approve_or_reject('{{request.id}}',1)">
+        Approve
+      </button>
+      <button id="reject-{{request.id}}" onclick="approve_or_reject('{{request.id}}',0)">
+        Reject</button><br />
+    </div>
+    {% endfor %}
+  {% else %}
+    <h3 class="text-center" style="color:#0b5243;font-size:5.0rem;">
+    No request pending there as of now
+    </h3>
+  {% endif %}
+</div>
+  <script>
+     function approve_or_reject(id, approve) {
+    $.ajax({
+      type: "GET",
+      url: "{% url 'ajax_change_status' %}",
+      data: {
+        request_id: id,
+        request_status: approve,
+      },
+      dataType: "json",
+      success: function (data) {
+        if (data.success) {
+          $("#" + id).html(data.status);
+        } else {
+          $("#" + id).append("<p>Something went wrong</p>");
+        }
+      },
+    });
+  }
+  </script>
+{% endblock %}

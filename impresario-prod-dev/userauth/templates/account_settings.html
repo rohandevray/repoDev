@@ -1,0 +1,10 @@
+{% extends 'adminbase.html' %}
+{% block title %}Account Setting{% endblock %}
+{% block body %}
+<div class="container fadeIn" style="background-color:#f2d9d91c" > 
+<h3>MENU</h3>
+<li><a href="{% url 'userauth:change_password' %}">Change Password</a></li>
+<br>
+<a class="btn btn-danger mx-20 my-10" href="{% url 'userauth:logout' %}">LOGOUT</a>
+</div>
+{% endblock %}

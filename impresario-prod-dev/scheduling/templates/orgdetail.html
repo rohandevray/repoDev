@@ -1,0 +1,56 @@
+{% extends 'adminbase.html' %} 
+{% block title %} Create team {% endblock %}
+{% load static%}
+{% block body %}
+{% comment %} <a href="{% url 'userauth:logout' %}">logout</a> {% endcomment %}
+<div class="container text-center fadeIn" style="background-color:#ebf0ef;  border: solid; border-radius: 10px; border-color: #36b39a; padding: 40px;  margin: 0; position: absolute; top: 60%; left: 50%; transform: translate(-50%, -50%);">
+    <h1 class="text-center" style="color:#0b5243; font-size:4.5em;">{{org}}</h1>
+    <h3 class="text-center" style="color:rgb(41, 175, 146); font-size:2.0em;">{{org.description}}</h3>
+    <h3 style="color:#0d725e; font-size:2.0em;">Sub-organisations: </h3>
+        {% for child in child_org %}
+        {%if child is not none %}
+        <a style="color:rgb(41, 175, 146); margin:5px; font-size: 1.75rem;" href="{% url 'orgDetail' child.id %}">{{child.name}}</a>
+        <br>
+        {% else %}
+        <h3 style="color:rgb(41, 175, 146); margin:5px; font-size: 1.75rem;">None</h3>
+        {% endif %}
+        {% endfor %}
+        <h3 style="color:#0d725e; font-size:2.0em;"> Members: </h3>
+
+    {% for m in members %}
+        {% if m.role == 1 %}
+        <h3 style="color:rgb(41, 175, 146); font-size:1.25em;" class="text-center">{{m.user.username}} (Admin) </h3>
+        {% else %}
+        <h3 style="color:rgb(41, 175, 146); font-size:1.25em;" class="text-center">{{m.user.username}}</h3>
+        {% endif %}
+    {% endfor %} 
+
+
+    <h3 style="color:#0d725e; font-size:2.0em;"> Upcoming Events: </h3>
+    {% for e in org.event.all %}
+        <a style="color:rgb(37, 139, 121);  font-size:1.25em; " href = "/userprofile/view_event/{{ e.id }}">
+        {{ e.title}}
+        </a>
+    {% endfor %} 
+    <br>
+    <br>
+    <br>
+        <div class="btn-group" style="font-size: 2.0rem; color: rgb(0, 162, 255);">
+            <button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More<span class="caret"></span></button> <br>
+            <ul class="dropdown-menu " style = "font-size: 1.75rem; padding: 10px;">
+                <li><a href = "/userprofile/{{ org.id }}/add_event">Add event </a></li>
+                <li><a href="{% url 'create_team' par_id %}">Create Team</a></li>
+                {% ifequal role 1 %}
+                <li><a href="{% url 'team_request' par_id %}">Team Requests</a></li> 
+                {% endifequal %}   
+                {% ifequal role 1 %}
+                <li><a href="{% url 'change_role' par_id %}">Change Role</a></li>
+                <li><a href="{% url 'dismiss_admin' par_id %}">Change Role to Participant</a></li>
+                
+                <li><a href="{% url 'edit_team' par_id %}">Edit Team</a></li>
+                {% endifequal %}
+                <li><a onclick="return confirm('Are you sure to leave the team?')" href="{% url 'leave_team' par_id %}" target="_self">Leave Team</a></li>
+        </div>
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'adminbase.html' %} 
+{% load static %}
+{% block title %} Update Event {% endblock %}
+{% comment %} <strong>
+{{warning}}
+</strong> {% endcomment %}
+
+{% block body %}
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+<h1> Update Event </h1>
+<form action = "/userprofile/edit_event/{{ event.id }}"  method = 'POST'>
+{% csrf_token %}
+<input type = "text" class = "fadeIn second" name="title" placeholder = "title" value = "{{event.title}}">
+<input type = "text" class = "fadeIn second" name="description"placeholder = "description" value = "{{event.description}}">
+<input type = "text" class = "fadeIn second" name="location" placeholder = "location" value = "{{event.location}}">
+<input type="date" class = "fadeIn second" name="start-date" date = "{{event.start_time.date}}">
+<input type="time" class = "fadeIn second" name="start-time" time = "{{event.start_time.time}}">
+<input type="date" class = "fadeIn second" name="end-date" date = "{{event.end_time.date}}">
+<input type="time" class = "fadeIn second" name="end-time" time = "{{event.start_time.time}}">
+<br>
+<select class = "fadeIn second" name = "status">
+    <option value=0>
+    Tentative 
+    </option>
+    
+    <option value=1>
+    Cancelled
+    </option>
+    
+    <option value=2>
+    Confirmed 
+    </option>
+    
+</select>
+<input  class = "fadeIn second" type="submit" value="Update">
+</form>
+</div>
+</div>
+
+{% endblock %}

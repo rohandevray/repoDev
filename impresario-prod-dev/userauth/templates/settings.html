@@ -1,0 +1,50 @@
+{% extends 'adminbase.html' %}
+<!DOCTYPE html>
+{% load static %}
+{% block title %}Settings{% endblock %}
+
+{% block active %} 
+<li class="active"><a href="{% url 'userauth:home' %}">HOME</a></li>
+<li ><a href="/scheduling">EXISTING TEAMS</a></li>  
+<li><a href="{% url 'new_team' %}">CREATE TEAM</a></li>
+{% comment %} <li><a href="{% url 'team_request' par_id %}">TEAM REQUESTS</a></li> {% endcomment %}
+<li><a href="{% url 'view_calendar' %}">CALENDAR</a></li>
+{% endblock %}
+
+{% block body %}
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <!-- <div class="fadeIn first">
+      <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
+    </div> -->
+
+    <!-- Login Form -->
+    <form action="{% url 'userauth:change_password' %}" method='post'>
+    {%csrf_token%}
+    	<p>Change Password</p>
+      <input type="text" id="current password" class="fadeIn second" name="cur_password" placeholder="current password">
+      <input type="text" id="new password" class="fadeIn third" name="password" placeholder="new password">
+      <input type="text" id="confirm new password" class="fadeIn fourth" name="password2" placeholder="confirm new password">
+      <input type="submit" class="fadeIn fourth" value="Done">
+     
+   <div>
+    {%for message in messages%}
+    <h3>{{message}}</h3>
+    {%endfor%}
+  </div>
+<br>
+<!--<a class="btn btn-primary mx-10 my-10" href="{% url 'userauth:home' %}">Home</a>
+<a class="btn btn-danger mx-20 my-10" href="{% url 'userauth:logout'%}">LOGOUT</a>-->
+
+     
+    </form>
+    <p class="btn1" style="font: black;"><a href="{% url 'userauth:home' %}" style="text-decoration: none;">Home</a></p>
+    <p class="btn1" style="font: black;"><a href="{% url 'userauth:home' %}" style="text-decoration: none;">Logout</a></p>
+    
+  </div>
+</div>
+{% endblock %}

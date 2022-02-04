@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <title>{% block title %}Admin base {% endblock %}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static '/css/base1.css' %}">
+  <link rel="stylesheet" href="{% static '/css/login.css' %}">
+  <link rel="stylesheet" href="{% static '/css/settings.css' %}">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Varela+Round" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>  
+<style>
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: grey;
+  color: white;
+  text-align: center;
+  margin-bottom:0;
+}
+
+</style>
+
+</head>
+<body>
+<div class = "container-bg">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav">
+      <a class="navbar-brand" style="font-family: 'Satisfy', cursive;" href="{% url 'userauth:home' %}">Impresario</a>
+     {% block active %} <li><a href="{% url 'userauth:home' %}">HOME</a></li>
+    {% if user.is_authenticated %}
+      <li class="active"><a href="/scheduling">EXISTING TEAMS</a></li>  
+      <li><a href="{% url 'new_team' %}">CREATE TEAM</a></li>
+      {% comment %} <li><a href="{% url 'team_request' par_id %}">TEAM REQUESTS</a></li> {% endcomment %}
+      <li><a href="{% url 'view_calendar' %}">CALENDAR</a></li>
+      {% else %}
+     
+      <li><a href="/userauth/login">Login</a></li>  
+      <li><a href="/userauth/register">Register</a></li>
+      {% comment %} <li><a href="{% url 'team_request' par_id %}">TEAM REQUESTS</a></li> {% endcomment %}
+     {% endif%}
+      {% endblock %}
+     
+    </ul>
+    {% if user.is_authenticated %}
+    <div class="dropdown navbar-right" style=" margin: 5px;  font-size: 1.75rem; padding: 10px;">
+      <button class=" dropdown-toggle" type="button" data-toggle="dropdown">Options
+      <span class="caret"></span></button> <br>
+      <ul class="dropdown-menu">
+        <!-- <li><a href="#">Change username</a></li> -->
+        <li><a href="{% url 'userauth:change_password' %}">Change password</a></li>
+        <li><a href="{% url 'userauth:logout' %}">Log out</a></li>
+      </ul>
+    </div>
+      {% endif %}
+  </div>
+</nav>
+{% if warning%}
+<div class="alert alert-primary" role="alert">
+    {{ warning}}
+</div>
+{% endif %}
+
+{% block body %}
+{% endblock %}
+
+</div>
+</body>
+
+<!-- Footer -->
+{% comment %} <footer class="bg-light text-center text-lg-start" >
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(139, 133, 133, 0.2);">
+    <p style="padding: 2px;">IE NITK</p>
+    <h4 style="padding: 5px;">© 2021 Copyright: Impresario </h4>
+    <!-- <a class="text-dark" href="https://mdbootstrap.com/">Impresario.com</a> -->
+  </div>
+  <!-- Copyright -->
+</footer> {% endcomment %}
+<!-- Footer -->
+
+</html>
+
